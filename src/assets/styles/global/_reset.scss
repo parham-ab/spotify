@@ -22,9 +22,6 @@ body {
 textarea:hover,
 textarea:active,
 textarea:focus,
-input:hover,
-input:active,
-input:focus,
 select:hover,
 select:active,
 select:focus,
@@ -37,4 +34,7 @@ label:focus,
   outline: 0px !important;
   -webkit-appearance: none;
   box-shadow: none !important;
+}
+svg {
+  cursor: pointer;
 }
