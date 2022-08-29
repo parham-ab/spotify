@@ -2,7 +2,7 @@ import React from "react";
 // components
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
-import Main from "./components/Main";
+import SongsList from "./components/songsList";
 // context
 import SpotifyContextProvider from "./contexts/SpotifyContextProvider";
 
@@ -11,11 +11,11 @@ const App = () => {
     <SpotifyContextProvider>
       <Header />
       <div className="d-flex" style={{ height: "62vh" }}>
-        <div className="col-md-4">
+        <div className="col-lg-2 col-md-3 ">
           <Sidebar />
         </div>
-        <div className="col-md-4">
-          <Main />
+        <div className="col-lg-10 col-md-7 ">
+          <SongsList />
         </div>
       </div>
     </SpotifyContextProvider>
