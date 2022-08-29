@@ -1,4 +1,3 @@
-import React from "react";
 // icons
 import { MdOutlineFavoriteBorder } from "react-icons/md";
 import me from "../../assets/img/me.jpg";
@@ -12,8 +11,8 @@ const AllSongs = () => {
           style={{ backgroundImage: `url(${me})` }}
         ></div>
         <div className="song-list-info d-flex align-items-center flex-column p-2">
-          <h3 className="fw-bold">singer</h3>
-          <h6 className="text-success">song name</h6>
+          <h3 className="fw-bold">song name</h3>
+          <h6 className="text-success">singer</h6>
         </div>
       </div>
 

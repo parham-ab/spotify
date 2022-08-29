@@ -8,7 +8,7 @@ import {
   MdArrowForwardIos,
   MdOutlineArrowBackIosNew,
 } from "react-icons/md";
-import me from "../assets/img/me.jpg";
+import me from "../../assets/img/me.jpg";
 
 const Header = () => {
   return (
