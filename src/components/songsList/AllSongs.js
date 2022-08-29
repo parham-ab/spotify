@@ -1,7 +1,7 @@
 // context
 import { useContext } from "react";
 import { SpotifyContext } from "../../contexts/SpotifyContextProvider";
-
+// components
 import Song from "./Song";
 
 const AllSongs = () => {
