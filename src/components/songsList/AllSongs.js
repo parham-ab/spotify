@@ -12,7 +12,7 @@ const AllSongs = () => {
       {songData.map((item) => (
         <div
           className="songLists d-flex align-items-center justify-content-between p-3"
-          //   active-item class
+          //   active-item class 
           key={item.id}
         >
           <div className="d-flex align-items-center">
