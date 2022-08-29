@@ -5,8 +5,7 @@ import { SpotifyContext } from "../../contexts/SpotifyContextProvider";
 import { MdFavorite, MdOutlineFavoriteBorder } from "react-icons/md";
 
 const Song = ({ item }) => {
-  const { songData, setSongData } = useContext(SpotifyContext);
-  const songTrack = useRef();
+  const { songData, setSongData, songTrack } = useContext(SpotifyContext);
 
   // play song
   const playHandle = (id) => {
@@ -15,15 +14,12 @@ const Song = ({ item }) => {
     newSongData.forEach((item) => {
       item.isPlaying = false;
       item.active = false;
-
-      // console.log(songTrack.current.src);
     });
     newSongData[songIndex].active = true;
     newSongData[songIndex].isPlaying = true;
     songTrack.current.src = songData[songIndex].track;
     newSongData[songIndex].isPlaying && songTrack.current.play();
     setSongData(newSongData);
-    // console.log(songTrack.current.src);
   };
   // add to favorite songs
   const toggleFavorite = (id) => {
@@ -42,11 +38,13 @@ const Song = ({ item }) => {
           : "songLists d-flex align-items-center justify-content-between p-3 m-3"
       }
     >
-      {/* song source */}
-      <audio ref={songTrack} controls></audio>
       <div className="d-flex align-items-center">
         <div
-          className="song-list-cover d-sm-block d-none"
+          className={
+            item.active
+              ? "song-list-cover d-sm-block d-none spinner"
+              : "song-list-cover d-sm-block d-none"
+          }
           style={{ backgroundImage: `url(${item.cover})` }}
         ></div>
         <div className="song-list-info d-flex align-items-center flex-column p-2">

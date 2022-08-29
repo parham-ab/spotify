@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useRef, useState } from "react";
 // song
 import song1 from "../assets/music/taylor-style.mp3";
 import song2 from "../assets/music/Ellie-Goulding-Hate-Me.mp3";
@@ -43,9 +43,12 @@ const SpotifyContextProvider = ({ children }) => {
       isPlaying: false,
     },
   ]);
+  const songTrack = useRef();
 
   return (
-    <SpotifyContext.Provider value={{ songData, setSongData }}>
+    <SpotifyContext.Provider value={{ songData, setSongData, songTrack }}>
+      {/* song source */}
+      <audio ref={songTrack} controls></audio>
       {children}
     </SpotifyContext.Provider>
   );

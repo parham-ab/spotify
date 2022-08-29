@@ -12,24 +12,28 @@ import {
 import { SpotifyContext } from "../../contexts/SpotifyContextProvider";
 
 const Header = () => {
-  const { songData, setSongData } = useContext(SpotifyContext);
-  const [updatedData, setUpdatedData] = useState([]);
+  const { songData, setSongData, songTrack } = useContext(SpotifyContext);
+  const [currentSong, setCurrentSong] = useState([]);
+
   useEffect(() => {
     const playingSong = songData.filter((item) => item.isPlaying);
-    const defaultSong = songData.map((item) => item);
-    // console.log(defaultSong[0]);
-    // updatedData ? setUpdatedData(playingSong) : setUpdatedData(defaultSong[0]);
-    setUpdatedData(playingSong);
+    setCurrentSong(playingSong);
   }, [songData]);
   // play song
   const playHandle = (id) => {
     const songIndex = songData.findIndex((item) => item.id === id);
     const newSongData = [...songData];
-
-    // newSongData[songIndex].active = true;
-    newSongData[songIndex].isPlaying = !newSongData[songIndex].isPlaying;
+    newSongData.forEach((item) => {
+      item.isPlaying = false;
+      item.active = false;
+    });
+    newSongData[songIndex].active = true;
+    newSongData[songIndex].isPlaying = true;
+    songTrack.current.src = songData[songIndex].track;
+    newSongData[songIndex].isPlaying = true
+      ? songTrack.current.play()
+      : songTrack.current.pause();
     setSongData(newSongData);
-    // setUpdatedData(newSongData);
   };
   // add to favorite songs
   const toggleFavorite = (id) => {
@@ -43,8 +47,8 @@ const Header = () => {
     <header className="header-container">
       <div className="container">
         <div className="d-flex justify-content-between align-items-center">
-          {updatedData.map((item) => (
-            <div className="d-flex align-items-center m-auto">
+          {currentSong.map((item) => (
+            <div className="d-flex align-items-center m-auto" key={item.id}>
               {/* cover */}
               <div className="d-none d-sm-block m-4">
                 <div
