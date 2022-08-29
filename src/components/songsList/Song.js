@@ -45,7 +45,7 @@ const Song = ({ item }) => {
               ? "song-list-cover d-sm-block d-none spinner"
               : "song-list-cover d-sm-block d-none"
           }
-          style={{ backgroundImage: `url(${item.cover})`,cursor:'pointer' }}
+          style={{ backgroundImage: `url(${item.cover})`, cursor: "pointer" }}
         ></div>
         <div className="song-list-info d-flex align-items-center flex-column p-2">
           <h3 className="fw-bold" style={{ wordBreak: "break-all" }}>

@@ -14,6 +14,7 @@ import { SpotifyContext } from "../../contexts/SpotifyContextProvider";
 const Header = () => {
   const { songData, setSongData, songTrack } = useContext(SpotifyContext);
   const [currentSong, setCurrentSong] = useState([]);
+  const [changed, setChanged] = useState(false);
 
   useEffect(() => {
     const playingSong = songData.filter((item) => item.isPlaying);
@@ -23,24 +24,21 @@ const Header = () => {
   const playHandle = (id) => {
     const songIndex = songData.findIndex((item) => item.id === id);
     const newSongData = [...songData];
-    newSongData.forEach((item) => {
-      item.isPlaying = false;
-      item.active = false;
-    });
-    newSongData[songIndex].active = true;
-    newSongData[songIndex].isPlaying = true;
-    songTrack.current.src = songData[songIndex].track;
-    newSongData[songIndex].isPlaying = true
-      ? songTrack.current.play()
-      : songTrack.current.pause();
-    setSongData(newSongData);
+    newSongData[songIndex].isPlaying = !newSongData[songIndex].isPlaying;
+    if (newSongData[songIndex].isPlaying) {
+      songTrack.current.play();
+      setChanged(true);
+    } else {
+      songTrack.current.pause();
+      setChanged(false);
+    }
   };
   // add to favorite songs
   const toggleFavorite = (id) => {
     const songIndex = songData.findIndex((item) => item.id === id);
     const newSongData = [...songData];
     newSongData[songIndex].isFavorite = !newSongData[songIndex].isFavorite;
-    console.log(newSongData[songIndex].isFavorite);
+    setChanged(!changed)
   };
 
   return (
@@ -95,13 +93,15 @@ const Header = () => {
                     className="w-100"
                   />
                 </div>
-                <div className="mt-4 header-btn-handler">
+                <div className="mt-4 header-btn-handler d-flex align-items-center">
                   <MdOutlineArrowBackIosNew />
-                  {item.isPlaying ? (
-                    <BsPlayFill style={{ margin: "0 10px" }} />
-                  ) : (
-                    <BsPlayFill style={{ margin: "0 10px" }} />
-                  )}
+                  <div onClick={() => playHandle(item.id)}>
+                    {item.isPlaying ? (
+                      <BsPauseFill style={{ margin: "0 10px" }} />
+                    ) : (
+                      <BsPlayFill style={{ margin: "0 10px" }} />
+                    )}
+                  </div>
                   <MdArrowForwardIos />
                 </div>
               </div>
