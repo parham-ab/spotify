@@ -10,11 +10,11 @@ const App = () => {
   return (
     <SpotifyContextProvider>
       <Header />
-      <div className="d-flex" style={{ height: "62vh" }}>
+      <div className="d-flex" style={{ height: "60vh" }}>
         <div className="col-lg-2 col-md-3 ">
           <Sidebar />
         </div>
-        <div className="col-lg-10 col-md-7 ">
+        <div className="col-lg-10 col-md-7" style={{ overflow: "auto" }}>
           <SongsList />
         </div>
       </div>
