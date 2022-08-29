@@ -1,17 +1,36 @@
-import { useContext, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 // context
 import { SpotifyContext } from "../../contexts/SpotifyContextProvider";
 // icons
-import { MdOutlineFavoriteBorder } from "react-icons/md";
+import { MdFavorite, MdOutlineFavoriteBorder } from "react-icons/md";
 
 const Song = ({ item }) => {
-  const songData = useContext(SpotifyContext);
+  const { songData, setSongData } = useContext(SpotifyContext);
   const songTrack = useRef();
+
   // play song
   const playHandle = (id) => {
-    songTrack.current.play();
     const songIndex = songData.findIndex((item) => item.id === id);
-    console.log(songIndex);
+    const newSongData = [...songData];
+    newSongData.forEach((item) => {
+      item.isPlaying = false;
+      item.active = false;
+
+      // console.log(songTrack.current.src);
+    });
+    newSongData[songIndex].active = true;
+    newSongData[songIndex].isPlaying = true;
+    songTrack.current.src = songData[songIndex].track;
+    newSongData[songIndex].isPlaying && songTrack.current.play();
+    setSongData(newSongData);
+    // console.log(songTrack.current.src);
+  };
+  // add to favorite songs
+  const toggleFavorite = (id) => {
+    const songIndex = songData.findIndex((item) => item.id === id);
+    const newSongData = [...songData];
+    newSongData[songIndex].isFavorite = !newSongData[songIndex].isFavorite;
+    console.log(newSongData[songIndex].isFavorite);
   };
 
   return (
@@ -24,7 +43,7 @@ const Song = ({ item }) => {
       }
     >
       {/* song source */}
-      <audio src={item.track} ref={songTrack} controls></audio>
+      <audio ref={songTrack} controls></audio>
       <div className="d-flex align-items-center">
         <div
           className="song-list-cover d-sm-block d-none"
@@ -40,8 +59,11 @@ const Song = ({ item }) => {
         </div>
       </div>
 
-      <div className="song-list-options d-none d-sm-block">
-        <MdOutlineFavoriteBorder />
+      <div
+        className="song-list-options d-none d-sm-block"
+        onClick={() => toggleFavorite(item.id)}
+      >
+        {item.isFavorite ? <MdFavorite /> : <MdOutlineFavoriteBorder />}
       </div>
     </div>
   );

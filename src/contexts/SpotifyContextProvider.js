@@ -11,15 +11,16 @@ import pic3 from "../assets/img/lana.jfif";
 export const SpotifyContext = createContext();
 
 const SpotifyContextProvider = ({ children }) => {
-  const [data, setData] = useState([
+  const [songData, setSongData] = useState([
     {
       id: 1,
       title: "Style",
       singer: "Taylor Swift",
       cover: pic1,
       track: song1,
-      active: true,
+      active: false,
       isFavorite: false,
+      isPlaying: true,
     },
     {
       id: 2,
@@ -28,7 +29,8 @@ const SpotifyContextProvider = ({ children }) => {
       cover: pic2,
       track: song2,
       active: false,
-      isFavorite: false,
+      isFavorite: true,
+      isPlaying: false,
     },
     {
       id: 3,
@@ -38,11 +40,14 @@ const SpotifyContextProvider = ({ children }) => {
       track: song3,
       active: false,
       isFavorite: false,
+      isPlaying: false,
     },
   ]);
 
   return (
-    <SpotifyContext.Provider value={data}>{children}</SpotifyContext.Provider>
+    <SpotifyContext.Provider value={{ songData, setSongData }}>
+      {children}
+    </SpotifyContext.Provider>
   );
 };
 

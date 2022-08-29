@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 // icons
 import { BsPlayFill, BsPauseFill } from "react-icons/bs";
 import {
@@ -8,59 +8,101 @@ import {
   MdArrowForwardIos,
   MdOutlineArrowBackIosNew,
 } from "react-icons/md";
-// img
-import pic1 from "../../assets/img/taylor.jfif";
+// context
+import { SpotifyContext } from "../../contexts/SpotifyContextProvider";
 
 const Header = () => {
+  const { songData, setSongData } = useContext(SpotifyContext);
+  const [updatedData, setUpdatedData] = useState([]);
+  useEffect(() => {
+    const playingSong = songData.filter((item) => item.isPlaying);
+    const defaultSong = songData.map((item) => item);
+    // console.log(defaultSong[0]);
+    // updatedData ? setUpdatedData(playingSong) : setUpdatedData(defaultSong[0]);
+    setUpdatedData(playingSong);
+  }, [songData]);
+  // play song
+  const playHandle = (id) => {
+    const songIndex = songData.findIndex((item) => item.id === id);
+    const newSongData = [...songData];
+
+    // newSongData[songIndex].active = true;
+    newSongData[songIndex].isPlaying = !newSongData[songIndex].isPlaying;
+    setSongData(newSongData);
+    // setUpdatedData(newSongData);
+  };
+  // add to favorite songs
+  const toggleFavorite = (id) => {
+    const songIndex = songData.findIndex((item) => item.id === id);
+    const newSongData = [...songData];
+    newSongData[songIndex].isFavorite = !newSongData[songIndex].isFavorite;
+    console.log(newSongData[songIndex].isFavorite);
+  };
+
   return (
     <header className="header-container">
       <div className="container">
         <div className="d-flex justify-content-between align-items-center">
-          <div className="d-flex align-items-center m-auto">
-            {/* cover */}
-            <div className="d-none d-sm-block m-4">
-              <div
-                className="song-cover d-flex align-items-center justify-content-center"
-                style={{ backgroundImage: `url(${pic1})` }}
-              >
-                <div>
-                  <BsPlayFill className="main-status-icon" />
+          {updatedData.map((item) => (
+            <div className="d-flex align-items-center m-auto">
+              {/* cover */}
+              <div className="d-none d-sm-block m-4">
+                <div
+                  key={item.id}
+                  className="song-cover d-flex align-items-center justify-content-center"
+                  style={{ backgroundImage: `url(${item.cover})` }}
+                >
+                  <div onClick={() => playHandle(item.id)}>
+                    {!item.isPlaying ? (
+                      <BsPlayFill className="main-status-icon" />
+                    ) : (
+                      <BsPauseFill className="main-status-icon" />
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-            {/* song info */}
-            <div>
-              <div className="d-flex justify-content-between">
-                <div>
-                  <h3>song title</h3>
-                  <h6>singer</h6>
+              {/* song info */}
+              <div>
+                <div className="d-flex justify-content-between">
+                  <div>
+                    <h3>{item.title}</h3>
+                    <h6>{item.singer}</h6>
+                  </div>
+                  {/* favorite button */}
+                  <div onClick={() => toggleFavorite(item.id)}>
+                    {item.isFavorite ? (
+                      <MdFavorite className="favorite-toggle" />
+                    ) : (
+                      <MdOutlineFavoriteBorder className="favorite-toggle" />
+                    )}
+                  </div>
                 </div>
-                {/* favorite button */}
-                <div>
-                  <MdOutlineFavoriteBorder className="favorite-toggle" />
-                </div>
-              </div>
 
-              <div className="song-range-time">
-                <div className="d-flex align-items-center justify-content-between">
-                  <span className="song-time current-time">00:00</span>
-                  <span className="song-time full-time">00:00</span>
+                <div className="song-range-time">
+                  <div className="d-flex align-items-center justify-content-between">
+                    <span className="song-time current-time">00:00</span>
+                    <span className="song-time full-time">00:00</span>
+                  </div>
+                  <input
+                    type="range"
+                    step={1}
+                    max={100}
+                    min={0}
+                    className="w-100"
+                  />
                 </div>
-                <input
-                  type="range"
-                  step={1}
-                  max={100}
-                  min={0}
-                  className="w-100"
-                />
-              </div>
-              <div className="mt-4 header-btn-handler">
-                <MdOutlineArrowBackIosNew />
-                <BsPlayFill style={{ margin: "0 10px" }} />
-                <MdArrowForwardIos />
+                <div className="mt-4 header-btn-handler">
+                  <MdOutlineArrowBackIosNew />
+                  {item.isPlaying ? (
+                    <BsPlayFill style={{ margin: "0 10px" }} />
+                  ) : (
+                    <BsPlayFill style={{ margin: "0 10px" }} />
+                  )}
+                  <MdArrowForwardIos />
+                </div>
               </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </header>

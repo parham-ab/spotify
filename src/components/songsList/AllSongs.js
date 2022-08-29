@@ -5,7 +5,7 @@ import { SpotifyContext } from "../../contexts/SpotifyContextProvider";
 import Song from "./Song";
 
 const AllSongs = () => {
-  const songData = useContext(SpotifyContext);
+  const { songData } = useContext(SpotifyContext);
 
   return (
     <>
