@@ -3,15 +3,17 @@
   color: #fff;
   width: 190px !important;
   height: 100% !important;
+  border-radius: 0 0 90px 0;
   .sidebar-list {
+    padding: 0 5px;
     li {
-      padding: 5px;
+      padding: 10px;
       border-radius: 10px;
       font-size: 16px;
       transition: all 0.3s;
       width: 140px !important;
       &:hover {
-          width: 140px !important;
+        width: 140px !important;
         background: #fff;
         color: #111;
         transition: all 0.3s;

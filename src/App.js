@@ -10,8 +10,14 @@ const App = () => {
   return (
     <SpotifyContextProvider>
       <Header />
-      <Sidebar />
-      <Main />
+      <div className="d-flex" style={{ height: "62vh" }}>
+        <div className="col-md-4">
+          <Sidebar />
+        </div>
+        <div className="col-md-4">
+          <Main />
+        </div>
+      </div>
     </SpotifyContextProvider>
   );
 };
