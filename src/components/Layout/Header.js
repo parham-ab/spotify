@@ -28,6 +28,7 @@ const Header = () => {
     if (newSongData[songIndex].isPlaying) {
       songTrack.current.play();
       setChanged(true);
+      return;
     } else {
       songTrack.current.pause();
       setChanged(false);
@@ -38,7 +39,7 @@ const Header = () => {
     const songIndex = songData.findIndex((item) => item.id === id);
     const newSongData = [...songData];
     newSongData[songIndex].isFavorite = !newSongData[songIndex].isFavorite;
-    setChanged(!changed)
+    setChanged(!changed);
   };
 
   return (
