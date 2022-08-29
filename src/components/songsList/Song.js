@@ -31,7 +31,6 @@ const Song = ({ item }) => {
 
   return (
     <div
-      onClick={() => playHandle(item.id)}
       className={
         item.active
           ? "songLists d-flex align-items-center justify-content-between p-3 m-3 active-item"
@@ -40,12 +39,13 @@ const Song = ({ item }) => {
     >
       <div className="d-flex align-items-center">
         <div
+          onClick={() => playHandle(item.id)}
           className={
             item.active
               ? "song-list-cover d-sm-block d-none spinner"
               : "song-list-cover d-sm-block d-none"
           }
-          style={{ backgroundImage: `url(${item.cover})` }}
+          style={{ backgroundImage: `url(${item.cover})`,cursor:'pointer' }}
         ></div>
         <div className="song-list-info d-flex align-items-center flex-column p-2">
           <h3 className="fw-bold" style={{ wordBreak: "break-all" }}>
