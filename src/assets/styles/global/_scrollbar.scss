@@ -1,17 +1,10 @@
-// scroll bar
 ::-webkit-scrollbar {
-  width: 9px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
   background-color: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: rgb(158, 158, 158);
+  background-color: #090420;
   border-radius: 5px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background-color: rgb(187, 187, 187);
-}
-::-webkit-scrollbar-thumb:active {
-  background-color: rgb(207, 207, 207);
 }
