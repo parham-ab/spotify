@@ -1,4 +1,5 @@
 import React from "react";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 // components
 import SongsList from "./components/songsList";
@@ -9,9 +10,10 @@ const App = () => {
   return (
     <SpotifyContextProvider>
       <Layout>
-        <div className="col-lg-10 col-md-7" style={{ overflow: "auto" }}>
-          <SongsList />
-        </div>
+        <Routes>
+          <Route path="/" element={<SongsList />} />
+          <Route path="/*" element={<Navigate to="/" />} />
+        </Routes>
       </Layout>
     </SpotifyContextProvider>
   );

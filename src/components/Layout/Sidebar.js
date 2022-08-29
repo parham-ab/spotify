@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation, Link } from "react-router-dom";
 // icons
 import { BsSpotify, BsFillInfoCircleFill } from "react-icons/bs";
 import { SiApplemusic } from "react-icons/si";
@@ -6,6 +7,7 @@ import { IoMdContact } from "react-icons/io";
 import { MdFavorite } from "react-icons/md";
 
 const Sidebar = () => {
+  const location = useLocation();
   const sidebarData = [
     {
       path: "/",
@@ -47,9 +49,14 @@ const Sidebar = () => {
       <div>
         <ul className="sidebar-list">
           {sidebarData.map((item, index) => (
-            <li key={index}>
+            <li
+              key={index}
+              className={
+                location.pathname === item.path ? `pathColor` : undefined
+              }
+            >
               {item.icon}
-              <a href={item.path}>{item.menuText}</a>
+              <Link to={item.path}>{item.menuText}</Link>
             </li>
           ))}
         </ul>
