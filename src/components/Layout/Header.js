@@ -8,7 +8,8 @@ import {
   MdArrowForwardIos,
   MdOutlineArrowBackIosNew,
 } from "react-icons/md";
-import me from "../../assets/img/me.jpg";
+// img
+import pic1 from "../../assets/img/taylor.jfif";
 
 const Header = () => {
   return (
@@ -20,7 +21,7 @@ const Header = () => {
             <div className="d-none d-sm-block m-4">
               <div
                 className="song-cover d-flex align-items-center justify-content-center"
-                style={{ backgroundImage: `url(${me})` }}
+                style={{ backgroundImage: `url(${pic1})` }}
               >
                 <div>
                   <BsPlayFill className="main-status-icon" />
