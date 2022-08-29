@@ -1,0 +1,22 @@
+.aside-container {
+  background-color: rgb(10, 9, 9);
+  color: #fff;
+  width: 190px !important;
+  height: 100% !important;
+  .sidebar-list {
+    li {
+      padding: 5px;
+      border-radius: 10px;
+      font-size: 16px;
+      transition: all 0.3s;
+      width: 140px !important;
+      &:hover {
+          width: 140px !important;
+        background: #fff;
+        color: #111;
+        transition: all 0.3s;
+        // box-shadow: 0 7px 29px 0 hsl(240deg 5% 41% / 20%);
+      }
+    }
+  }
+}

@@ -8,8 +8,9 @@
   border: none;
   outline: none;
   box-sizing: border-box;
-  text-decoration: none;
+  text-decoration: none !important;
   user-select: none;
+  list-style: none;
 }
 a {
   color: inherit;
