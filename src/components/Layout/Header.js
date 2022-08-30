@@ -4,7 +4,6 @@ import { BsPlayFill, BsPauseFill } from "react-icons/bs";
 import {
   MdFavorite,
   MdOutlineFavoriteBorder,
-  MdNavigateNext,
   MdArrowForwardIos,
   MdOutlineArrowBackIosNew,
 } from "react-icons/md";
@@ -12,7 +11,7 @@ import {
 import { SpotifyContext } from "../../contexts/SpotifyContextProvider";
 
 const Header = () => {
-  const { songData, setSongData, songTrack } = useContext(SpotifyContext);
+  const { songData, songTrack } = useContext(SpotifyContext);
   const [currentSong, setCurrentSong] = useState([]);
   const [changed, setChanged] = useState(false);
   const [songTimeLive, setSongTimeLive] = useState(0);

@@ -72,7 +72,11 @@ const Favorites = () => {
             className="song-list-options d-none d-sm-block"
             onClick={() => toggleFavorite(item.id)}
           >
-            {item.isFavorite ? <MdFavorite /> : <MdOutlineFavoriteBorder />}
+            {item.isFavorite ? (
+              <MdFavorite style={{ color: "#df5a5a" }} />
+            ) : (
+              <MdOutlineFavoriteBorder style={{ color: "#df5a5a" }} />
+            )}
           </div>
         </div>
       ))}
