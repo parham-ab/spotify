@@ -27,11 +27,11 @@ const Header = () => {
     newSongData[songIndex].isPlaying = !newSongData[songIndex].isPlaying;
     if (newSongData[songIndex].isPlaying) {
       songTrack.current.play();
-      setChanged(true);
+      setChanged(!changed);
       return;
     } else {
       songTrack.current.pause();
-      setChanged(false);
+      setChanged(!changed);
     }
   };
   // add to favorite songs

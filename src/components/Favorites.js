@@ -34,7 +34,7 @@ const Favorites = () => {
   }, [songData]);
 
   return (
-    <div>
+    <div className="col-6 col-sm-7 col-md-9" style={{ overflow: "auto" }}>
       {favoriteSelections.map((item) => (
         <div
           key={item.id}
