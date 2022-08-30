@@ -101,16 +101,20 @@ const Header = () => {
                       {readableTime(songTimeLive)}
                     </span>
                     <span className="song-time full-time">
-                      {readableTime(songTimeFull)}
+                      {readableTime(songTimeFull) === "NaN : aN"
+                        ? "0 : 00"
+                        : readableTime(songTimeFull)}
                     </span>
                   </div>
                   <input
                     type="range"
                     step={1}
-                    max={songTimeFull}
+                    max={!!songTimeFull && songTimeFull}
                     min={0}
                     value={songTimeLive}
-                    onChange={(e) => e.target.value}
+                    onChange={(e) =>
+                      (songTrack.current.currentTime = e.target.value)
+                    }
                     className="w-100"
                   />
                 </div>
