@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useState } from "react";
 // context
 import { SpotifyContext } from "../../contexts/SpotifyContextProvider";
 // icons
@@ -27,7 +27,6 @@ const Song = ({ item }) => {
     const songIndex = songData.findIndex((item) => item.id === id);
     const newSongData = [...songData];
     newSongData[songIndex].isFavorite = !newSongData[songIndex].isFavorite;
-    console.log(newSongData[songIndex].isFavorite);
     setChanged(!changed);
   };
 
@@ -63,7 +62,11 @@ const Song = ({ item }) => {
         className="song-list-options d-none d-sm-block"
         onClick={() => toggleFavorite(item.id)}
       >
-        {item.isFavorite ? <MdFavorite /> : <MdOutlineFavoriteBorder />}
+        {item.isFavorite ? (
+          <MdFavorite style={{ color: "#df5a5a" }} />
+        ) : (
+          <MdOutlineFavoriteBorder style={{ color: "#df5a5a" }} />
+        )}
       </div>
     </div>
   );

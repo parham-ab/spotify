@@ -48,6 +48,13 @@ const Header = () => {
       setChanged(!changed);
     }
   };
+  // go to next song
+  const nextSongHandle = () => {
+    const playingSong = songData.filter((item) => item.isPlaying);
+// setCurrentSong()
+    console.log(currentSong,songData);
+    // console.log(currentSong);
+  };
   // add to favorite songs
   const toggleFavorite = (id) => {
     const songIndex = songData.findIndex((item) => item.id === id);
@@ -127,7 +134,7 @@ const Header = () => {
                       <BsPlayFill style={{ margin: "0 10px" }} />
                     )}
                   </div>
-                  <MdArrowForwardIos />
+                  <MdArrowForwardIos onClick={nextSongHandle} />
                 </div>
               </div>
             </div>
