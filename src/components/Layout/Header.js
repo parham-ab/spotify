@@ -50,7 +50,7 @@ const Header = () => {
   };
   // go to next song
   const nextSongHandle = () => {
-    const playingSong = songData.filter((item) => item.isPlaying);
+    // const playingSong = songData.filter((item) => item.isPlaying);
 // setCurrentSong()
     console.log(currentSong,songData);
     // console.log(currentSong);
