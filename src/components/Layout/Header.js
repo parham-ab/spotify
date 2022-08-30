@@ -109,8 +109,8 @@ const Header = () => {
                   <input
                     type="range"
                     step={1}
-                    max={!!songTimeFull && songTimeFull}
                     min={0}
+                    max={isNaN(songTimeFull) ? 100 : songTimeFull}
                     value={songTimeLive}
                     onChange={(e) =>
                       (songTrack.current.currentTime = e.target.value)
