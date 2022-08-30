@@ -15,11 +15,25 @@ const Header = () => {
   const { songData, setSongData, songTrack } = useContext(SpotifyContext);
   const [currentSong, setCurrentSong] = useState([]);
   const [changed, setChanged] = useState(false);
+  const [songTimeLive, setSongTimeLive] = useState(0);
+  const [songTimeFull, setSongTimeFull] = useState(0);
+  // readable song time function
+  const readableTime = (time) => {
+    return `${Math.trunc(time / 60)} : ${("0" + Math.trunc(time % 60)).slice(
+      -2
+    )}`;
+  };
 
   useEffect(() => {
     const playingSong = songData.filter((item) => item.isPlaying);
     setCurrentSong(playingSong);
   }, [songData]);
+  useEffect(() => {
+    setInterval(() => {
+      setSongTimeLive(songTrack.current.currentTime);
+      setSongTimeFull(songTrack.current.duration);
+    }, 1000);
+  }, [currentSong]);
   // play song
   const playHandle = (id) => {
     const songIndex = songData.findIndex((item) => item.id === id);
@@ -83,14 +97,20 @@ const Header = () => {
 
                 <div className="song-range-time">
                   <div className="d-flex align-items-center justify-content-between">
-                    <span className="song-time current-time">00:00</span>
-                    <span className="song-time full-time">00:00</span>
+                    <span className="song-time current-time">
+                      {readableTime(songTimeLive)}
+                    </span>
+                    <span className="song-time full-time">
+                      {readableTime(songTimeFull)}
+                    </span>
                   </div>
                   <input
                     type="range"
                     step={1}
-                    max={100}
+                    max={songTimeFull}
                     min={0}
+                    value={songTimeLive}
+                    onChange={(e) => e.target.value}
                     className="w-100"
                   />
                 </div>
