@@ -5,6 +5,7 @@ import { MdFavorite, MdOutlineFavoriteBorder } from "react-icons/md";
 
 const Favorites = () => {
   const { songData, setSongData, songTrack } = useContext(SpotifyContext);
+  const [changed, setChanged] = useState(false);
 
   // play song
   const playHandle = (id) => {
@@ -25,7 +26,7 @@ const Favorites = () => {
     const songIndex = songData.findIndex((item) => item.id === id);
     const newSongData = [...songData];
     newSongData[songIndex].isFavorite = !newSongData[songIndex].isFavorite;
-    console.log(newSongData[songIndex].isFavorite);
+    setChanged(!changed);
   };
   const [favoriteSelections, setFavoriteSelections] = useState([]);
   useEffect(() => {

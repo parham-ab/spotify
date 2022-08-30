@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 // context
 import { SpotifyContext } from "../../contexts/SpotifyContextProvider";
 // icons
@@ -6,6 +6,7 @@ import { MdFavorite, MdOutlineFavoriteBorder } from "react-icons/md";
 
 const Song = ({ item }) => {
   const { songData, setSongData, songTrack } = useContext(SpotifyContext);
+  const [changed, setChanged] = useState(false);
 
   // play song
   const playHandle = (id) => {
@@ -27,6 +28,7 @@ const Song = ({ item }) => {
     const newSongData = [...songData];
     newSongData[songIndex].isFavorite = !newSongData[songIndex].isFavorite;
     console.log(newSongData[songIndex].isFavorite);
+    setChanged(!changed);
   };
 
   return (
