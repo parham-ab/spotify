@@ -51,8 +51,8 @@ const Header = () => {
   // go to next song
   const nextSongHandle = () => {
     // const playingSong = songData.filter((item) => item.isPlaying);
-// setCurrentSong()
-    console.log(currentSong,songData);
+    // setCurrentSong()
+    console.log(currentSong, songData);
     // console.log(currentSong);
   };
   // add to favorite songs
@@ -113,17 +113,25 @@ const Header = () => {
                         : readableTime(songTimeFull)}
                     </span>
                   </div>
-                  <input
-                    type="range"
-                    step={1}
-                    min={0}
-                    max={isNaN(songTimeFull) ? 100 : songTimeFull}
-                    value={songTimeLive}
-                    onChange={(e) =>
-                      (songTrack.current.currentTime = e.target.value)
-                    }
-                    className="w-100"
-                  />
+                  <div className="song-tape">
+                    <div
+                      className="progress"
+                      style={{
+                        width: `${(songTimeLive / songTimeFull) * 100}%`,
+                      }}
+                    ></div>
+                    <input
+                      type="range"
+                      step={1}
+                      min={0}
+                      max={isNaN(songTimeFull) ? 100 : songTimeFull}
+                      value={songTimeLive}
+                      onChange={(e) =>
+                        (songTrack.current.currentTime = e.target.value)
+                      }
+                      className="w-100"
+                    />
+                  </div>
                 </div>
                 <div className="mt-4 header-btn-handler d-flex align-items-center">
                   <MdOutlineArrowBackIosNew />
