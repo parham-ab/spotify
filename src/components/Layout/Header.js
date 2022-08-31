@@ -13,6 +13,7 @@ import { SpotifyContext } from "../../contexts/SpotifyContextProvider";
 const Header = () => {
   const { songData, songTrack } = useContext(SpotifyContext);
   const [currentSong, setCurrentSong] = useState([]);
+  const [defaultSong, setDefaultSong] = useState([]);
   const [changed, setChanged] = useState(false);
   const [songTimeLive, setSongTimeLive] = useState(0);
   const [songTimeFull, setSongTimeFull] = useState(0);
@@ -22,8 +23,12 @@ const Header = () => {
       -2
     )}`;
   };
-
+  // playing song
   useEffect(() => {
+    if (!currentSong.length) {
+      const intendedSong = songData.find((item) => item.title === "Style");
+      setDefaultSong(intendedSong);
+    }
     const playingSong = songData.filter((item) => item.isPlaying);
     setCurrentSong(playingSong);
   }, [songData]);
@@ -66,17 +71,101 @@ const Header = () => {
     <header className="header-container">
       <div className="container">
         <div className="d-flex justify-content-between align-items-center">
-          {currentSong.map((item) => (
-            <div className="d-flex align-items-center m-auto" key={item.id}>
+          {currentSong.length ? (
+            currentSong.map((item) => (
+              <div className="d-flex align-items-center m-auto" key={item.id}>
+                {/* cover */}
+                <div className="d-none d-sm-block m-4">
+                  <div
+                    key={item.id}
+                    className="song-cover d-flex align-items-center justify-content-center"
+                    style={{ backgroundImage: `url(${item.cover})` }}
+                  >
+                    <div onClick={() => playHandle(item.id)}>
+                      {!item.isPlaying ? (
+                        <BsPlayFill className="main-status-icon" />
+                      ) : (
+                        <BsPauseFill className="main-status-icon" />
+                      )}
+                    </div>
+                  </div>
+                </div>
+                {/* song info */}
+                <div>
+                  <div className="d-flex justify-content-between">
+                    <div>
+                      <h3>{item.title}</h3>
+                      <h6>{item.singer}</h6>
+                    </div>
+                    {/* favorite button */}
+                    <div onClick={() => toggleFavorite(item.id)}>
+                      {item.isFavorite ? (
+                        <MdFavorite className="favorite-toggle" />
+                      ) : (
+                        <MdOutlineFavoriteBorder className="favorite-toggle" />
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="song-range-time">
+                    <div className="d-flex align-items-center justify-content-between">
+                      <span className="song-time current-time">
+                        {readableTime(songTimeLive)}
+                      </span>
+                      <span className="song-time full-time">
+                        {readableTime(songTimeFull) === "NaN : aN"
+                          ? "0 : 00"
+                          : readableTime(songTimeFull)}
+                      </span>
+                    </div>
+                    <div className="song-tape">
+                      <div
+                        className="progress"
+                        style={{
+                          width: `${(songTimeLive / songTimeFull) * 100}%`,
+                        }}
+                      ></div>
+                      <input
+                        type="range"
+                        step={1}
+                        min={0}
+                        max={isNaN(songTimeFull) ? 100 : songTimeFull}
+                        value={songTimeLive}
+                        onChange={(e) =>
+                          (songTrack.current.currentTime = e.target.value)
+                        }
+                        className="w-100"
+                      />
+                    </div>
+                  </div>
+                  <div className="mt-4 header-btn-handler d-flex align-items-center">
+                    <MdOutlineArrowBackIosNew />
+                    <div onClick={() => playHandle(item.id)}>
+                      {item.isPlaying ? (
+                        <BsPauseFill style={{ margin: "0 10px" }} />
+                      ) : (
+                        <BsPlayFill style={{ margin: "0 10px" }} />
+                      )}
+                    </div>
+                    <MdArrowForwardIos onClick={nextSongHandle} />
+                  </div>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div
+              className="d-flex align-items-center m-auto"
+              key={defaultSong.id}
+            >
               {/* cover */}
               <div className="d-none d-sm-block m-4">
                 <div
-                  key={item.id}
+                  key={defaultSong.id}
                   className="song-cover d-flex align-items-center justify-content-center"
-                  style={{ backgroundImage: `url(${item.cover})` }}
+                  style={{ backgroundImage: `url(${defaultSong.cover})` }}
                 >
-                  <div onClick={() => playHandle(item.id)}>
-                    {!item.isPlaying ? (
+                  <div onClick={() => playHandle(defaultSong.id)}>
+                    {!defaultSong.isPlaying ? (
                       <BsPlayFill className="main-status-icon" />
                     ) : (
                       <BsPauseFill className="main-status-icon" />
@@ -88,12 +177,12 @@ const Header = () => {
               <div>
                 <div className="d-flex justify-content-between">
                   <div>
-                    <h3>{item.title}</h3>
-                    <h6>{item.singer}</h6>
+                    <h3>{defaultSong.title}</h3>
+                    <h6>{defaultSong.singer}</h6>
                   </div>
                   {/* favorite button */}
-                  <div onClick={() => toggleFavorite(item.id)}>
-                    {item.isFavorite ? (
+                  <div onClick={() => toggleFavorite(defaultSong.id)}>
+                    {defaultSong.isFavorite ? (
                       <MdFavorite className="favorite-toggle" />
                     ) : (
                       <MdOutlineFavoriteBorder className="favorite-toggle" />
@@ -134,8 +223,8 @@ const Header = () => {
                 </div>
                 <div className="mt-4 header-btn-handler d-flex align-items-center">
                   <MdOutlineArrowBackIosNew />
-                  <div onClick={() => playHandle(item.id)}>
-                    {item.isPlaying ? (
+                  <div onClick={() => playHandle(defaultSong.id)}>
+                    {defaultSong.isPlaying ? (
                       <BsPauseFill style={{ margin: "0 10px" }} />
                     ) : (
                       <BsPlayFill style={{ margin: "0 10px" }} />
@@ -145,7 +234,7 @@ const Header = () => {
                 </div>
               </div>
             </div>
-          ))}
+          )}
         </div>
       </div>
     </header>

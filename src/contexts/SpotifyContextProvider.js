@@ -20,7 +20,7 @@ const SpotifyContextProvider = ({ children }) => {
       track: song1,
       active: false,
       isFavorite: false,
-      isPlaying: true,
+      isPlaying: false,
     },
     {
       id: 2,
@@ -29,7 +29,7 @@ const SpotifyContextProvider = ({ children }) => {
       cover: pic2,
       track: song2,
       active: false,
-      isFavorite: true,
+      isFavorite: false,
       isPlaying: false,
     },
     {
