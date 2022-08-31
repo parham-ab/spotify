@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 // context
 import { SpotifyContext } from "../../contexts/SpotifyContextProvider";
 // icons

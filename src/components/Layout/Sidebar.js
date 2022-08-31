@@ -32,19 +32,16 @@ const Sidebar = () => {
   ];
   return (
     <aside className="aside-container h-100">
-      <div className="d-flex align-items-center p-4">
-        <div>
-          <BsSpotify
-            style={{
-              fontSize: "27px",
-              color: "rgb(29 185 84)",
-              cursor: "auto",
-            }}
-          />
-        </div>
-        <div>
-          <h4 className="p-1">Spotify</h4>
-        </div>
+      <div className="d-flex align-items-center p-3">
+        <BsSpotify
+          style={{
+            fontSize: "27px",
+            color: "rgb(29 185 84)",
+            cursor: "auto",
+          }}
+        />
+
+        <h4 className="p-1">Spotify</h4>
       </div>
       <div>
         <ul className="sidebar-list">

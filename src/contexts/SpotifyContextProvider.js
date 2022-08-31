@@ -43,6 +43,8 @@ const SpotifyContextProvider = ({ children }) => {
       isPlaying: false,
     },
   ]);
+  // const [currentSong, setCurrentSong] = useState([]);
+
   // this state is for update 'isFavorite' immediately & in all components
   const [changed, setChanged] = useState(false);
 
@@ -70,13 +72,45 @@ const SpotifyContextProvider = ({ children }) => {
     setChanged(!changed);
   };
   // go to next song
-  const nextSongHandle = () => {
-    console.log("next");
-  };
-  // go to previous song
-  const prevSongHandle = () => {
-    console.log("prev");
-  };
+  // const nextSongHandle = () => {
+  //   const newSongData = [...songData];
+  //   newSongData.forEach((item) => {
+  //     item.active = false;
+  //     item.isPlaying = false;
+  //   });
+  //   songTrack.current.src = null;
+  //   const currentIndex = songData.findIndex(
+  //     (item) => item.id === currentSong[0].id
+  //   );
+  //   songTrack.current.src = [newSongData[currentIndex].track];
+  //   newSongData[currentIndex].isPlaying = !newSongData[currentIndex].isPlaying;
+  //   // newSongData[currentIndex + 1].active = true;
+  //   songTrack.current.play();
+  //   setCurrentSong([newSongData[currentIndex + 1]]);
+  //   // setCurrentSong([songData[currentIndex + 1]]);
+  //   if (songData.indexOf(currentSong[0]) === songData.length - 1) {
+  //     setCurrentSong([songData[0]]);
+  //   }
+  // };
+  // // go to previous song
+  // const prevSongHandle = () => {
+  //   const currentIndex = songData.findIndex(
+  //     (item) => item.id === currentSong[0].id
+  //   );
+  //   const newSongData = [...songData];
+  //   console.log([newSongData[currentIndex].track]);
+  //   newSongData.forEach((item) => {
+  //     item.active = false;
+  //     item.isPlaying = false;
+  //   });
+  //   songTrack.current.src = null;
+  //   // songTrack.current.src = [newSongData[currentIndex].track];
+  //   newSongData[currentIndex].isPlaying = true;
+  //   // setChanged(!changed);
+  //   newSongData[currentIndex].active = true;
+  //   setCurrentSong([newSongData[currentIndex - 1]]);
+  //   songTrack.current.play();
+  // };
 
   return (
     <SpotifyContext.Provider
@@ -86,11 +120,14 @@ const SpotifyContextProvider = ({ children }) => {
         songTrack,
         playHandle,
         toggleFavorite,
-        nextSongHandle,
-        prevSongHandle,
+        // currentSong,
+        // setCurrentSong,
+        // nextSongHandle,
+        // prevSongHandle,
       }}
     >
       {/* song source */}
+      {/* <audio ref={songTrack} onEnded={nextSongHandle}></audio> */}
       <audio ref={songTrack}></audio>
       {children}
     </SpotifyContext.Provider>

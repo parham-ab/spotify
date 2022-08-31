@@ -11,14 +11,9 @@ import {
 import { SpotifyContext } from "../../contexts/SpotifyContextProvider";
 
 const Header = () => {
-  const {
-    songData,
-    songTrack,
-    toggleFavorite,
-    nextSongHandle,
-    prevSongHandle,
-  } = useContext(SpotifyContext);
   const [currentSong, setCurrentSong] = useState([]);
+
+  const { songData, songTrack, toggleFavorite } = useContext(SpotifyContext);
   const [defaultSong, setDefaultSong] = useState([]);
   const [changed, setChanged] = useState(false);
   const [songTimeLive, setSongTimeLive] = useState(0);
@@ -38,6 +33,7 @@ const Header = () => {
     const playingSong = songData.filter((item) => item.isPlaying);
     setCurrentSong(playingSong);
   }, [songData]);
+
   useEffect(() => {
     setInterval(() => {
       setSongTimeLive(songTrack.current.currentTime);
@@ -57,6 +53,16 @@ const Header = () => {
       songTrack.current.pause();
       setChanged(!changed);
     }
+  };
+  // next song btn
+  const nextSongHandle = () => {
+    const newSongData = [...songData];
+    const Index = newSongData.findIndex(
+      (item) => item.id === currentSong[0].id
+    );
+    const intendedSong = newSongData[Index];
+    // setCurrentSong([intendedSong]);
+    console.log(intendedSong);
   };
 
   return (
@@ -133,7 +139,7 @@ const Header = () => {
                     <div>
                       <MdOutlineArrowBackIosNew
                         style={{ fontSize: "25px" }}
-                        onClick={prevSongHandle}
+                        // onClick={prevSongHandle}
                       />
                     </div>
                     <div onClick={() => playHandle(item.id)}>
@@ -190,14 +196,13 @@ const Header = () => {
                     )}
                   </div>
                 </div>
-
                 <div className="song-range-time">
                   <div className="d-flex align-items-center justify-content-between">
                     <span className="song-time current-time">0 : 00</span>
                     <span className="song-time full-time">0 : 00</span>
                   </div>
                   <div className="song-tape">
-                    <input type="range" min={0} className="w-100" />
+                    <input type="range" className="w-100" />
                   </div>
                 </div>
                 <div className="mt-4 header-btn-handler d-flex align-items-center">
