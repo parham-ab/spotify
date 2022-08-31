@@ -11,7 +11,7 @@ import {
 import { SpotifyContext } from "../../contexts/SpotifyContextProvider";
 
 const Header = () => {
-  const { songData, songTrack } = useContext(SpotifyContext);
+  const { songData, songTrack, toggleFavorite } = useContext(SpotifyContext);
   const [currentSong, setCurrentSong] = useState([]);
   const [defaultSong, setDefaultSong] = useState([]);
   const [changed, setChanged] = useState(false);
@@ -59,13 +59,6 @@ const Header = () => {
   // go to previous song
   const prevSongHandle = () => {
     console.log("prev");
-  };
-  // add to favorite songs
-  const toggleFavorite = (id) => {
-    const songIndex = songData.findIndex((item) => item.id === id);
-    const newSongData = [...songData];
-    newSongData[songIndex].isFavorite = !newSongData[songIndex].isFavorite;
-    setChanged(!changed);
   };
 
   return (

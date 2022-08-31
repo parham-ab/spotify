@@ -4,30 +4,8 @@ import { SpotifyContext } from "../contexts/SpotifyContextProvider";
 import { MdFavorite, MdOutlineFavoriteBorder } from "react-icons/md";
 
 const Favorites = () => {
-  const { songData, setSongData, songTrack } = useContext(SpotifyContext);
-  const [changed, setChanged] = useState(false);
+  const { songData, toggleFavorite, playHandle } = useContext(SpotifyContext);
 
-  // play song
-  const playHandle = (id) => {
-    const songIndex = songData.findIndex((item) => item.id === id);
-    const newSongData = [...songData];
-    newSongData.forEach((item) => {
-      item.isPlaying = false;
-      item.active = false;
-    });
-    newSongData[songIndex].active = true;
-    newSongData[songIndex].isPlaying = true;
-    songTrack.current.src = songData[songIndex].track;
-    newSongData[songIndex].isPlaying && songTrack.current.play();
-    setSongData(newSongData);
-  };
-  // add to favorite songs
-  const toggleFavorite = (id) => {
-    const songIndex = songData.findIndex((item) => item.id === id);
-    const newSongData = [...songData];
-    newSongData[songIndex].isFavorite = !newSongData[songIndex].isFavorite;
-    setChanged(!changed);
-  };
   const [favoriteSelections, setFavoriteSelections] = useState([]);
   useEffect(() => {
     const filteredFavorites = songData.filter((item) => item.isFavorite);

@@ -43,10 +43,37 @@ const SpotifyContextProvider = ({ children }) => {
       isPlaying: false,
     },
   ]);
+  // this state is for update 'isFavorite' immediately & in all components
+  const [changed, setChanged] = useState(false);
+
   const songTrack = useRef();
 
+  // play song
+  const playHandle = (id) => {
+    const songIndex = songData.findIndex((item) => item.id === id);
+    const newSongData = [...songData];
+    newSongData.forEach((item) => {
+      item.isPlaying = false;
+      item.active = false;
+    });
+    newSongData[songIndex].active = true;
+    newSongData[songIndex].isPlaying = true;
+    songTrack.current.src = songData[songIndex].track;
+    newSongData[songIndex].isPlaying && songTrack.current.play();
+    setSongData(newSongData);
+  };
+  // add to favorite songs
+  const toggleFavorite = (id) => {
+    const songIndex = songData.findIndex((item) => item.id === id);
+    const newSongData = [...songData];
+    newSongData[songIndex].isFavorite = !newSongData[songIndex].isFavorite;
+    setChanged(!changed);
+  };
+
   return (
-    <SpotifyContext.Provider value={{ songData, setSongData, songTrack }}>
+    <SpotifyContext.Provider
+      value={{ songData, setSongData, songTrack, playHandle, toggleFavorite }}
+    >
       {/* song source */}
       <audio ref={songTrack}></audio>
       {children}
