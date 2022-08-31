@@ -31,7 +31,7 @@ const Sidebar = () => {
     },
   ];
   return (
-    <aside className="aside-container h-100">
+    <aside className="aside-container h-100 shadow-lg">
       <div className="d-flex align-items-center p-3">
         <BsSpotify
           style={{

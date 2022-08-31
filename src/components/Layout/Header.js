@@ -126,7 +126,7 @@ const Header = () => {
                     </div>
                   </div>
                   <div className="mt-4 header-btn-handler d-flex align-items-center">
-                    <div onClick={() => playHandle(item.id)}>
+                    <div onClick={() => playHandle(item.id)}  className="d-block d-sm-none">
                       {item.isPlaying ? (
                         <BsPauseFill
                           style={{ margin: "0 10px", fontSize: "25px" }}
