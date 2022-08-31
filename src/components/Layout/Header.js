@@ -54,10 +54,11 @@ const Header = () => {
   };
   // go to next song
   const nextSongHandle = () => {
-    // const playingSong = songData.filter((item) => item.isPlaying);
-    // setCurrentSong()
-    console.log(currentSong, songData);
-    // console.log(currentSong);
+    console.log("next");
+  };
+  // go to previous song
+  const prevSongHandle = () => {
+    console.log("prev");
   };
   // add to favorite songs
   const toggleFavorite = (id) => {
@@ -139,7 +140,7 @@ const Header = () => {
                     </div>
                   </div>
                   <div className="mt-4 header-btn-handler d-flex align-items-center">
-                    <MdOutlineArrowBackIosNew />
+                    <MdOutlineArrowBackIosNew onClick={prevSongHandle} />
                     <div onClick={() => playHandle(item.id)}>
                       {item.isPlaying ? (
                         <BsPauseFill style={{ margin: "0 10px" }} />
@@ -165,11 +166,7 @@ const Header = () => {
                   style={{ backgroundImage: `url(${defaultSong.cover})` }}
                 >
                   <div onClick={() => playHandle(defaultSong.id)}>
-                    {!defaultSong.isPlaying ? (
-                      <BsPlayFill className="main-status-icon" />
-                    ) : (
-                      <BsPauseFill className="main-status-icon" />
-                    )}
+                    <BsPlayFill className="main-status-icon" />
                   </div>
                 </div>
               </div>
@@ -223,14 +220,10 @@ const Header = () => {
                 </div>
                 <div className="mt-4 header-btn-handler d-flex align-items-center">
                   <MdOutlineArrowBackIosNew />
-                  <div onClick={() => playHandle(defaultSong.id)}>
-                    {defaultSong.isPlaying ? (
-                      <BsPauseFill style={{ margin: "0 10px" }} />
-                    ) : (
-                      <BsPlayFill style={{ margin: "0 10px" }} />
-                    )}
+                  <div>
+                    <BsPlayFill style={{ margin: "0 10px" }} />
                   </div>
-                  <MdArrowForwardIos onClick={nextSongHandle} />
+                  <MdArrowForwardIos />
                 </div>
               </div>
             </div>
