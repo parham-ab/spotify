@@ -107,14 +107,13 @@ const Header = () => {
                       )}
                     </div>
                   </div>
-
                   <div className="song-range-time">
                     <div className="d-flex align-items-center justify-content-between">
                       <span className="song-time current-time">
                         {readableTime(songTimeLive)}
                       </span>
                       <span className="song-time full-time">
-                        {readableTime(songTimeFull) === "NaN : aN"
+                        {isNaN(songTimeFull)
                           ? "0 : 00"
                           : readableTime(songTimeFull)}
                       </span>
@@ -165,7 +164,7 @@ const Header = () => {
                   className="song-cover d-flex align-items-center justify-content-center"
                   style={{ backgroundImage: `url(${defaultSong.cover})` }}
                 >
-                  <div onClick={() => playHandle(defaultSong.id)}>
+                  <div>
                     <BsPlayFill className="main-status-icon" />
                   </div>
                 </div>
@@ -189,41 +188,23 @@ const Header = () => {
 
                 <div className="song-range-time">
                   <div className="d-flex align-items-center justify-content-between">
-                    <span className="song-time current-time">
-                      {readableTime(songTimeLive)}
-                    </span>
-                    <span className="song-time full-time">
-                      {readableTime(songTimeFull) === "NaN : aN"
-                        ? "0 : 00"
-                        : readableTime(songTimeFull)}
-                    </span>
+                    <span className="song-time current-time">0 : 00</span>
+                    <span className="song-time full-time">0 : 00</span>
                   </div>
                   <div className="song-tape">
-                    <div
-                      className="progress"
-                      style={{
-                        width: `${(songTimeLive / songTimeFull) * 100}%`,
-                      }}
-                    ></div>
-                    <input
-                      type="range"
-                      step={1}
-                      min={0}
-                      max={isNaN(songTimeFull) ? 100 : songTimeFull}
-                      value={songTimeLive}
-                      onChange={(e) =>
-                        (songTrack.current.currentTime = e.target.value)
-                      }
-                      className="w-100"
-                    />
+                    <input type="range" min={0} className="w-100" />
                   </div>
                 </div>
                 <div className="mt-4 header-btn-handler d-flex align-items-center">
-                  <MdOutlineArrowBackIosNew />
+                  <div>
+                    <MdOutlineArrowBackIosNew />
+                  </div>
                   <div>
                     <BsPlayFill style={{ margin: "0 10px" }} />
                   </div>
-                  <MdArrowForwardIos />
+                  <div>
+                    <MdArrowForwardIos />
+                  </div>
                 </div>
               </div>
             </div>
