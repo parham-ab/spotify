@@ -69,10 +69,26 @@ const SpotifyContextProvider = ({ children }) => {
     newSongData[songIndex].isFavorite = !newSongData[songIndex].isFavorite;
     setChanged(!changed);
   };
+  // go to next song
+  const nextSongHandle = () => {
+    console.log("next");
+  };
+  // go to previous song
+  const prevSongHandle = () => {
+    console.log("prev");
+  };
 
   return (
     <SpotifyContext.Provider
-      value={{ songData, setSongData, songTrack, playHandle, toggleFavorite }}
+      value={{
+        songData,
+        setSongData,
+        songTrack,
+        playHandle,
+        toggleFavorite,
+        nextSongHandle,
+        prevSongHandle,
+      }}
     >
       {/* song source */}
       <audio ref={songTrack}></audio>

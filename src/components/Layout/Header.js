@@ -11,7 +11,13 @@ import {
 import { SpotifyContext } from "../../contexts/SpotifyContextProvider";
 
 const Header = () => {
-  const { songData, songTrack, toggleFavorite } = useContext(SpotifyContext);
+  const {
+    songData,
+    songTrack,
+    toggleFavorite,
+    nextSongHandle,
+    prevSongHandle,
+  } = useContext(SpotifyContext);
   const [currentSong, setCurrentSong] = useState([]);
   const [defaultSong, setDefaultSong] = useState([]);
   const [changed, setChanged] = useState(false);
@@ -51,14 +57,6 @@ const Header = () => {
       songTrack.current.pause();
       setChanged(!changed);
     }
-  };
-  // go to next song
-  const nextSongHandle = () => {
-    console.log("next");
-  };
-  // go to previous song
-  const prevSongHandle = () => {
-    console.log("prev");
   };
 
   return (
@@ -132,15 +130,29 @@ const Header = () => {
                     </div>
                   </div>
                   <div className="mt-4 header-btn-handler d-flex align-items-center">
-                    <MdOutlineArrowBackIosNew onClick={prevSongHandle} />
+                    <div>
+                      <MdOutlineArrowBackIosNew
+                        style={{ fontSize: "25px" }}
+                        onClick={prevSongHandle}
+                      />
+                    </div>
                     <div onClick={() => playHandle(item.id)}>
                       {item.isPlaying ? (
-                        <BsPauseFill style={{ margin: "0 10px" }} />
+                        <BsPauseFill
+                          style={{ margin: "0 10px", fontSize: "25px" }}
+                        />
                       ) : (
-                        <BsPlayFill style={{ margin: "0 10px" }} />
+                        <BsPlayFill
+                          style={{ margin: "0 10px", fontSize: "25px" }}
+                        />
                       )}
                     </div>
-                    <MdArrowForwardIos onClick={nextSongHandle} />
+                    <div>
+                      <MdArrowForwardIos
+                        style={{ fontSize: "25px" }}
+                        onClick={nextSongHandle}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -190,13 +202,15 @@ const Header = () => {
                 </div>
                 <div className="mt-4 header-btn-handler d-flex align-items-center">
                   <div>
-                    <MdOutlineArrowBackIosNew />
+                    <MdOutlineArrowBackIosNew style={{ fontSize: "25px" }} />
                   </div>
                   <div>
-                    <BsPlayFill style={{ margin: "0 10px" }} />
+                    <BsPlayFill
+                      style={{ margin: "0 10px", fontSize: "25px" }}
+                    />
                   </div>
                   <div>
-                    <MdArrowForwardIos />
+                    <MdArrowForwardIos style={{ fontSize: "25px" }} />
                   </div>
                 </div>
               </div>
