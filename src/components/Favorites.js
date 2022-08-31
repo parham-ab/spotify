@@ -3,6 +3,7 @@ import { SpotifyContext } from "../contexts/SpotifyContextProvider";
 // icons
 import { MdFavorite, MdOutlineFavoriteBorder } from "react-icons/md";
 import { TbMoodCry } from "react-icons/tb";
+import DynamicTitle from "./hooks/DynamicTitle";
 
 const Favorites = () => {
   const { songData, toggleFavorite, playHandle } = useContext(SpotifyContext);
@@ -12,6 +13,8 @@ const Favorites = () => {
     const filteredFavorites = songData.filter((item) => item.isFavorite);
     setFavoriteSelections(filteredFavorites);
   }, [songData]);
+  // title
+  DynamicTitle("React Spotify - ❤");
 
   return (
     <div className="col-6 col-sm-7 col-md-9" style={{ overflow: "auto" }}>

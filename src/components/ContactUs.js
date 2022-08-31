@@ -2,8 +2,13 @@
 import { MdEmail } from "react-icons/md";
 import { FaInternetExplorer } from "react-icons/fa";
 import { BsGithub, BsLinkedin } from "react-icons/bs";
+// hooks
+import DynamicTitle from "./hooks/DynamicTitle";
 
 const ContactUs = () => {
+  // title
+  DynamicTitle("React Spotify - 📫");
+
   return (
     <section className="d-flex flex-row justify-content-center align-items-center m-auto">
       <p className="col-5 d-none d-sm-block info-box shadow">
