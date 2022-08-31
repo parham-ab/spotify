@@ -54,16 +54,6 @@ const Header = () => {
       setChanged(!changed);
     }
   };
-  // next song btn
-  const nextSongHandle = () => {
-    const newSongData = [...songData];
-    const Index = newSongData.findIndex(
-      (item) => item.id === currentSong[0].id
-    );
-    const intendedSong = newSongData[Index];
-    // setCurrentSong([intendedSong]);
-    console.log(intendedSong);
-  };
 
   return (
     <header className="header-container">
@@ -136,12 +126,6 @@ const Header = () => {
                     </div>
                   </div>
                   <div className="mt-4 header-btn-handler d-flex align-items-center">
-                    <div>
-                      <MdOutlineArrowBackIosNew
-                        style={{ fontSize: "25px" }}
-                        // onClick={prevSongHandle}
-                      />
-                    </div>
                     <div onClick={() => playHandle(item.id)}>
                       {item.isPlaying ? (
                         <BsPauseFill
@@ -152,12 +136,6 @@ const Header = () => {
                           style={{ margin: "0 10px", fontSize: "25px" }}
                         />
                       )}
-                    </div>
-                    <div>
-                      <MdArrowForwardIos
-                        style={{ fontSize: "25px" }}
-                        onClick={nextSongHandle}
-                      />
                     </div>
                   </div>
                 </div>
@@ -174,11 +152,7 @@ const Header = () => {
                   key={defaultSong.id}
                   className="song-cover d-flex align-items-center justify-content-center"
                   style={{ backgroundImage: `url(${defaultSong.cover})` }}
-                >
-                  <div>
-                    <BsPlayFill className="main-status-icon" />
-                  </div>
-                </div>
+                ></div>
               </div>
               {/* song info */}
               <div>
@@ -203,19 +177,6 @@ const Header = () => {
                   </div>
                   <div className="song-tape">
                     <input type="range" className="w-100" />
-                  </div>
-                </div>
-                <div className="mt-4 header-btn-handler d-flex align-items-center">
-                  <div>
-                    <MdOutlineArrowBackIosNew style={{ fontSize: "25px" }} />
-                  </div>
-                  <div>
-                    <BsPlayFill
-                      style={{ margin: "0 10px", fontSize: "25px" }}
-                    />
-                  </div>
-                  <div>
-                    <MdArrowForwardIos style={{ fontSize: "25px" }} />
                   </div>
                 </div>
               </div>

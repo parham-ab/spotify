@@ -71,46 +71,6 @@ const SpotifyContextProvider = ({ children }) => {
     newSongData[songIndex].isFavorite = !newSongData[songIndex].isFavorite;
     setChanged(!changed);
   };
-  // go to next song
-  // const nextSongHandle = () => {
-  //   const newSongData = [...songData];
-  //   newSongData.forEach((item) => {
-  //     item.active = false;
-  //     item.isPlaying = false;
-  //   });
-  //   songTrack.current.src = null;
-  //   const currentIndex = songData.findIndex(
-  //     (item) => item.id === currentSong[0].id
-  //   );
-  //   songTrack.current.src = [newSongData[currentIndex].track];
-  //   newSongData[currentIndex].isPlaying = !newSongData[currentIndex].isPlaying;
-  //   // newSongData[currentIndex + 1].active = true;
-  //   songTrack.current.play();
-  //   setCurrentSong([newSongData[currentIndex + 1]]);
-  //   // setCurrentSong([songData[currentIndex + 1]]);
-  //   if (songData.indexOf(currentSong[0]) === songData.length - 1) {
-  //     setCurrentSong([songData[0]]);
-  //   }
-  // };
-  // // go to previous song
-  // const prevSongHandle = () => {
-  //   const currentIndex = songData.findIndex(
-  //     (item) => item.id === currentSong[0].id
-  //   );
-  //   const newSongData = [...songData];
-  //   console.log([newSongData[currentIndex].track]);
-  //   newSongData.forEach((item) => {
-  //     item.active = false;
-  //     item.isPlaying = false;
-  //   });
-  //   songTrack.current.src = null;
-  //   // songTrack.current.src = [newSongData[currentIndex].track];
-  //   newSongData[currentIndex].isPlaying = true;
-  //   // setChanged(!changed);
-  //   newSongData[currentIndex].active = true;
-  //   setCurrentSong([newSongData[currentIndex - 1]]);
-  //   songTrack.current.play();
-  // };
 
   return (
     <SpotifyContext.Provider

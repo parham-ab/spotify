@@ -40,7 +40,6 @@ const Sidebar = () => {
             cursor: "auto",
           }}
         />
-
         <h4 className="p-1">Spotify</h4>
       </div>
       <div>
