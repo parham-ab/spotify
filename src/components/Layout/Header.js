@@ -124,6 +124,7 @@ const Header = () => {
                           (songTrack.current.currentTime = e.target.value)
                         }
                         className="w-100"
+                        style={{ cursor: "pointer" }}
                       />
                     </div>
                   </div>
