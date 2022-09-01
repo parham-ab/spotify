@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 // icons
 import { BsPlayFill, BsPauseFill } from "react-icons/bs";
 import { MdFavorite, MdOutlineFavoriteBorder } from "react-icons/md";
+import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
 // context
 import { SpotifyContext } from "../../contexts/SpotifyContextProvider";
 
@@ -127,7 +128,9 @@ const Header = () => {
                     </div>
                   </div>
                   <div className="mt-4 header-btn-handler d-flex align-items-center">
-                    <div onClick={prevSongHandle}>prev</div>
+                    <div onClick={prevSongHandle}>
+                      <FaChevronLeft />
+                    </div>
                     <div onClick={() => playHandle(item.id)}>
                       {item.isPlaying ? (
                         <BsPauseFill
@@ -139,7 +142,9 @@ const Header = () => {
                         />
                       )}
                     </div>
-                    <div onClick={nextSongHandle}>next</div>
+                    <div onClick={nextSongHandle}>
+                      <FaChevronRight />
+                    </div>
                   </div>
                 </div>
               </div>
