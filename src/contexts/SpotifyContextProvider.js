@@ -96,7 +96,7 @@ const SpotifyContextProvider = ({ children }) => {
     }
     setChanged(!changed);
   };
-  // nextSongHandle
+  // next Song Handle
   const nextSongHandle = () => {
     const Index = songData.findIndex((item) => item.id === currentSong[0].id);
     const newSong = [...songData];
@@ -120,6 +120,30 @@ const SpotifyContextProvider = ({ children }) => {
       setCurrentSong([songData[Index + 1]]);
     }
   };
+  // prev Song Handle
+  const prevSongHandle = () => {
+    const Index = songData.findIndex((item) => item.id === currentSong[0].id);
+    const newSong = [...songData];
+    newSong.forEach((item) => {
+      item.isPlaying = false;
+      item.active = false;
+    });
+    if (newSong[Index].id === 1) {
+      songTrack.current.src = "";
+      songTrack.current.src = newSong.at(-1).track;
+      songTrack.current.play();
+      newSong.at(-1).active = true;
+      newSong.at(-1).isPlaying = true;
+      setCurrentSong([newSong.at(-1)]);
+    } else {
+      songTrack.current.src = "";
+      songTrack.current.src = newSong[Index - 1].track;
+      songTrack.current.play();
+      newSong[Index - 1].active = true;
+      newSong[Index - 1].isPlaying = true;
+      setCurrentSong([songData[Index - 1]]);
+    }
+  };
 
   return (
     <SpotifyContext.Provider
@@ -132,7 +156,7 @@ const SpotifyContextProvider = ({ children }) => {
         currentSong,
         setCurrentSong,
         nextSongHandle,
-        // prevSongHandle,
+        prevSongHandle,
       }}
     >
       {/* song source */}
