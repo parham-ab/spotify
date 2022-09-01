@@ -3,6 +3,7 @@
   .icon {
     position: relative;
     background: #111;
+    color: #fff;
     border-radius: 50%;
     padding: 15px;
     margin: 10px;
@@ -16,31 +17,90 @@
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    svg {
-      color: #fff;
-    }
-    .tooltip {
+  }
+  .tooltip {
+    position: absolute;
+    top: 0;
+    font-size: 14px;
+    background: #ffffff;
+    color: #ffffff;
+    padding: 5px 8px;
+    border-radius: 5px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    &::before {
       position: absolute;
-      top: 0;
-      font-size: 14px;
+      content: "";
+      height: 8px;
+      width: 8px;
       background: #ffffff;
-      color: #ffffff;
-      padding: 5px 8px;
-      border-radius: 5px;
-      box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
-      opacity: 0;
-      pointer-events: none;
+      bottom: -3px;
+      left: 50%;
+      transform: translate(-50%) rotate(45deg);
       transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-      &:hover {
-        position: absolute;
-        content: "";
-        height: 8px;
-        width: 8px;
-        background: #ffffff;
-        bottom: -3px;
-        left: 50%;
-        transform: translate(-50%) rotate(45deg);
-        transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+  }
+  .icon:hover {
+    .tooltip {
+      top: -45px;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+    span,
+    .tooltip {
+      text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+    }
+  }
+  .linkedin:hover {
+    background: #1877f2;
+    color: #ffffff;
+
+    .tooltip {
+      background: #1877f2;
+      color: #ffffff;
+
+      &::before {
+        background: #1877f2;
+        color: #ffffff;
+      }
+    }
+  }
+  .email:hover {
+    background: #cd201f;
+    color: #ffffff;
+    .tooltip {
+      background: #cd201f;
+      color: #ffffff;
+      &::before {
+        background: #cd201f;
+        color: #ffffff;
+      }
+    }
+  }
+  .website:hover {
+    background: #4e4ed2;
+    color: #ffffff;
+    .tooltip {
+      background: #4e4ed2;
+      color: #ffffff;
+      &::before {
+        background: #4e4ed2;
+        color: #ffffff;
+      }
+    }
+  }
+  .github:hover {
+    background: #333333;
+    color: #ffffff;
+    .tooltip {
+      background: #333333;
+      color: #ffffff;
+      &::before {
+        background: #333333;
+        color: #ffffff;
       }
     }
   }
@@ -49,38 +109,4 @@
   background: #f3f3f3;
   padding: 13px;
   border-radius: 10px;
-}
-.wrapper .icon:hover .tooltip {
-  top: -45px;
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-}
-.wrapper .icon:hover span,
-.wrapper .icon:hover .tooltip {
-  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
-}
-.wrapper .Linkedin:hover,
-.wrapper .Linkedin:hover .tooltip,
-.wrapper .Linkedin:hover .tooltip::before {
-  background: #1877f2;
-  color: #ffffff;
-}
-.wrapper .github:hover,
-.wrapper .github:hover .tooltip,
-.wrapper .github:hover .tooltip::before {
-  background: #333333;
-  color: #ffffff;
-}
-.wrapper .email:hover,
-.wrapper .email:hover .tooltip,
-.wrapper .email:hover .tooltip::before {
-  background: #cd201f;
-  color: #ffffff;
-}
-.wrapper .website:hover,
-.wrapper .website:hover .tooltip,
-.wrapper .website:hover .tooltip::before {
-  background: #4e4ed2;
-  color: #ffffff;
 }

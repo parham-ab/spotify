@@ -36,7 +36,7 @@ const ContactUs = () => {
           target={"_blank"}
           href="https://www.linkedin.com/in/parham-abolghasemi/"
         >
-          <li className="icon Linkedin">
+          <li className="icon linkedin">
             <span className="tooltip">Linkedin</span>
             <span>
               <BsLinkedin />
