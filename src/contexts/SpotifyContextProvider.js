@@ -83,7 +83,7 @@ const SpotifyContextProvider = ({ children }) => {
         theme: "dark",
       });
     if (!newSongData[songIndex].isFavorite) {
-      toast.error("Removed to favorites!", {
+      toast.error("Removed from favorites!", {
         position: "top-center",
         autoClose: 1500,
         hideProgressBar: false,
