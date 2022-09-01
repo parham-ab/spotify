@@ -1,9 +1,9 @@
 // hooks
-import DynamicTitle from "./hooks/DynamicTitle";
+import useTitle from "./hooks/useTitle";
 
 const AboutUs = () => {
   // title
-  DynamicTitle("React Spotify - ℹ");
+  useTitle("React Spotify - ℹ");
 
   return (
     <div className="d-flex flex-column justify-content-center m-auto p-3">

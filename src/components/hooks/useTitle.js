@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 
-const DynamicTitle = (title) => {
+const useTitle = (title) => {
   return useEffect(() => {
     document.title = title;
   }, []);
 };
 
-export default DynamicTitle;
+export default useTitle;

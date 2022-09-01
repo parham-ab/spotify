@@ -3,11 +3,11 @@ import { MdEmail } from "react-icons/md";
 import { FaInternetExplorer } from "react-icons/fa";
 import { BsGithub, BsLinkedin } from "react-icons/bs";
 // hooks
-import DynamicTitle from "./hooks/DynamicTitle";
+import useTitle from "./hooks/useTitle";
 
 const ContactUs = () => {
   // title
-  DynamicTitle("React Spotify - 📫");
+  useTitle("React Spotify - 📫");
 
   return (
     <section className="d-flex flex-row justify-content-center align-items-center m-auto">
