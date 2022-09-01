@@ -1,4 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 // icons
 import { BsPlayFill, BsPauseFill } from "react-icons/bs";
 import { MdFavorite, MdOutlineFavoriteBorder } from "react-icons/md";
@@ -72,10 +74,10 @@ const Header = () => {
                     style={{ backgroundImage: `url(${item.cover})` }}
                   >
                     <div onClick={() => playHandle(item.id)}>
-                      {!item.isPlaying ? (
-                        <BsPlayFill className="main-status-icon" />
-                      ) : (
+                      {item.isPlaying ? (
                         <BsPauseFill className="main-status-icon" />
+                      ) : (
+                        <BsPlayFill className="main-status-icon" />
                       )}
                     </div>
                   </div>
@@ -129,23 +131,42 @@ const Header = () => {
                     </div>
                   </div>
                   <div className="mt-4 header-btn-handler d-flex align-items-center">
-                    <div onClick={prevSongHandle}>
-                      <FaChevronLeft />
-                    </div>
-                    <div onClick={() => playHandle(item.id)}>
-                      {item.isPlaying ? (
-                        <BsPauseFill
-                          style={{ margin: "0 10px", fontSize: "25px" }}
-                        />
-                      ) : (
-                        <BsPlayFill
-                          style={{ margin: "0 10px", fontSize: "25px" }}
-                        />
-                      )}
-                    </div>
-                    <div onClick={nextSongHandle}>
-                      <FaChevronRight />
-                    </div>
+                    <OverlayTrigger
+                      placement="bottom"
+                      overlay={<Tooltip id="previous">Previous</Tooltip>}
+                    >
+                      <div onClick={prevSongHandle}>
+                        <FaChevronLeft />
+                      </div>
+                    </OverlayTrigger>
+                    <OverlayTrigger
+                      placement="bottom"
+                      overlay={
+                        <Tooltip id="tooltip-top">
+                          {item.isPlaying ? "Pause" : "Play"}
+                        </Tooltip>
+                      }
+                    >
+                      <div onClick={() => playHandle(item.id)}>
+                        {item.isPlaying ? (
+                          <BsPauseFill
+                            style={{ margin: "0 10px", fontSize: "25px" }}
+                          />
+                        ) : (
+                          <BsPlayFill
+                            style={{ margin: "0 10px", fontSize: "25px" }}
+                          />
+                        )}
+                      </div>
+                    </OverlayTrigger>
+                    <OverlayTrigger
+                      placement="bottom"
+                      overlay={<Tooltip id="tooltip-top">Next</Tooltip>}
+                    >
+                      <div onClick={nextSongHandle}>
+                        <FaChevronRight />
+                      </div>
+                    </OverlayTrigger>
                   </div>
                 </div>
               </div>
