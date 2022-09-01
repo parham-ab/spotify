@@ -41,7 +41,10 @@ const Favorites = () => {
                   cursor: "pointer",
                 }}
               ></div>
-              <div className="song-list-info d-flex align-items-center flex-column p-2">
+              <div
+                className="song-list-info d-flex align-items-center flex-column p-2"
+                onClick={() => playHandle(item.id)}
+              >
                 <h3 className="fw-bold" style={{ wordBreak: "break-all" }}>
                   {item.title}
                 </h3>
