@@ -1,4 +1,6 @@
 import React, { createContext, useRef, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // song
 import song1 from "../assets/music/taylor-style.mp3";
 import song2 from "../assets/music/Ellie-Goulding-Hate-Me.mp3";
@@ -69,6 +71,29 @@ const SpotifyContextProvider = ({ children }) => {
     const songIndex = songData.findIndex((item) => item.id === id);
     const newSongData = [...songData];
     newSongData[songIndex].isFavorite = !newSongData[songIndex].isFavorite;
+    if (newSongData[songIndex].isFavorite)
+      toast.success("Added to favorites!", {
+        position: "top-center",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    if (!newSongData[songIndex].isFavorite) {
+      toast.error("Removed to favorites!", {
+        position: "top-center",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
     setChanged(!changed);
   };
 
@@ -90,6 +115,7 @@ const SpotifyContextProvider = ({ children }) => {
       {/* <audio ref={songTrack} onEnded={nextSongHandle}></audio> */}
       <audio ref={songTrack}></audio>
       {children}
+      <ToastContainer />
     </SpotifyContext.Provider>
   );
 };
