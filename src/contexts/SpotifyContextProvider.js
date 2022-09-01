@@ -45,7 +45,7 @@ const SpotifyContextProvider = ({ children }) => {
       isPlaying: false,
     },
   ]);
-  // const [currentSong, setCurrentSong] = useState([]);
+  const [currentSong, setCurrentSong] = useState([]);
 
   // this state is for update 'isFavorite' immediately & in all components
   const [changed, setChanged] = useState(false);
@@ -96,6 +96,30 @@ const SpotifyContextProvider = ({ children }) => {
     }
     setChanged(!changed);
   };
+  // nextSongHandle
+  const nextSongHandle = () => {
+    const Index = songData.findIndex((item) => item.id === currentSong[0].id);
+    const newSong = [...songData];
+    newSong.forEach((item) => {
+      item.isPlaying = false;
+      item.active = false;
+    });
+    if (newSong[Index].id === newSong.length) {
+      songTrack.current.src = "";
+      songTrack.current.src = newSong[0].track;
+      songTrack.current.play();
+      newSong[0].active = true;
+      newSong[0].isPlaying = true;
+      setCurrentSong([songData[0]]);
+    } else {
+      songTrack.current.src = "";
+      songTrack.current.src = newSong[Index + 1].track;
+      songTrack.current.play();
+      newSong[Index + 1].active = true;
+      newSong[Index + 1].isPlaying = true;
+      setCurrentSong([songData[Index + 1]]);
+    }
+  };
 
   return (
     <SpotifyContext.Provider
@@ -105,15 +129,14 @@ const SpotifyContextProvider = ({ children }) => {
         songTrack,
         playHandle,
         toggleFavorite,
-        // currentSong,
-        // setCurrentSong,
-        // nextSongHandle,
+        currentSong,
+        setCurrentSong,
+        nextSongHandle,
         // prevSongHandle,
       }}
     >
       {/* song source */}
-      {/* <audio ref={songTrack} onEnded={nextSongHandle}></audio> */}
-      <audio ref={songTrack}></audio>
+      <audio ref={songTrack} onEnded={nextSongHandle}></audio>
       {children}
       <ToastContainer />
     </SpotifyContext.Provider>

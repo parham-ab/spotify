@@ -6,9 +6,15 @@ import { MdFavorite, MdOutlineFavoriteBorder } from "react-icons/md";
 import { SpotifyContext } from "../../contexts/SpotifyContextProvider";
 
 const Header = () => {
-  const [currentSong, setCurrentSong] = useState([]);
-
-  const { songData, songTrack, toggleFavorite } = useContext(SpotifyContext);
+  const {
+    songData,
+    songTrack,
+    toggleFavorite,
+    currentSong,
+    setCurrentSong,
+    nextSongHandle,
+    prevSongHandle,
+  } = useContext(SpotifyContext);
   const [defaultSong, setDefaultSong] = useState([]);
   const [changed, setChanged] = useState(false);
   const [songTimeLive, setSongTimeLive] = useState(0);

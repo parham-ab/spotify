@@ -26,16 +26,16 @@ const Song = ({ item }) => {
           style={{ backgroundImage: `url(${item.cover})`, cursor: "pointer" }}
         ></div>
         <div className="song-list-info d-flex align-items-center flex-column p-2">
-          <h3
+          <h4
             className="fw-bold"
             style={{ wordBreak: "break-all" }}
             onClick={() => playHandle(item.id)}
           >
             {item.title}
-          </h3>
-          <h6 className="text-success" style={{ wordBreak: "break-all" }}>
+          </h4>
+          <p className="text-success" style={{ wordBreak: "break-all" }}>
             {item.singer}
-          </h6>
+          </p>
         </div>
       </div>
 
