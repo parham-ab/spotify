@@ -131,14 +131,9 @@ const Header = () => {
                     </div>
                   </div>
                   <div className="mt-4 header-btn-handler d-flex align-items-center">
-                    <OverlayTrigger
-                      placement="bottom"
-                      overlay={<Tooltip id="previous">Previous</Tooltip>}
-                    >
-                      <div onClick={prevSongHandle}>
-                        <FaChevronLeft />
-                      </div>
-                    </OverlayTrigger>
+                    <div onClick={prevSongHandle}>
+                      <FaChevronLeft />
+                    </div>
                     <OverlayTrigger
                       placement="bottom"
                       overlay={
@@ -159,14 +154,9 @@ const Header = () => {
                         )}
                       </div>
                     </OverlayTrigger>
-                    <OverlayTrigger
-                      placement="bottom"
-                      overlay={<Tooltip id="tooltip-top">Next</Tooltip>}
-                    >
-                      <div onClick={nextSongHandle}>
-                        <FaChevronRight />
-                      </div>
-                    </OverlayTrigger>
+                    <div onClick={nextSongHandle}>
+                      <FaChevronRight />
+                    </div>
                   </div>
                 </div>
               </div>
